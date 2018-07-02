@@ -21,26 +21,12 @@ import java.util.*;
  * Time:14:23
  **/
 public class SimpleFileDeal implements FileDeal {
-
-    private String SAVE_FILE_PATH = "";
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     private static Random random = new Random();
 
-    private SimpleFileDeal() throws IOException {
-        this.SAVE_FILE_PATH = Constants.SAVE_FILE_PATH +
-                (StringUtils.isEmpty(Constants.SAVE_FILE_SECOND_PATH) ? "" : "/" + Constants.SAVE_FILE_SECOND_PATH) +
-                "/" + sdf.format(new Date());
-
-        Path path = Paths.get(this.SAVE_FILE_PATH);
-        if (!Files.exists(path)) Files.createDirectories(path);
-    }
-
-    public static SimpleFileDeal getInstance() throws IOException {
-        return new SimpleFileDeal();
-    }
-
     @Override
     public void saveFile(Set<String> urls,String basePath) {
+        if (urls == null) return;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         final long startTime = System.currentTimeMillis();
         urls.stream().forEach(url -> {
@@ -61,7 +47,7 @@ public class SimpleFileDeal implements FileDeal {
                     }
                 }
                 while (true){
-                    Path file = Paths.get(this.SAVE_FILE_PATH + "/" + System.currentTimeMillis() + "+" + random.nextInt(10000) + suffix);
+                    Path file = Paths.get(basePath + "/" + System.currentTimeMillis() + "+" + random.nextInt(10000) + suffix);
                     if (Files.exists(file)) continue;
                     Files.createFile(file);
                     Files.write(file,bos.toByteArray());
@@ -70,8 +56,7 @@ public class SimpleFileDeal implements FileDeal {
                 }
                 bos.reset();
             } catch (Exception e) {
-                System.out.println("catch");
-                TimeUtils.endTime(startTime,"saveFile",url, true);
+                System.out.println(url);
             }
         });
     }

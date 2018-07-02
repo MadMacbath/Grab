@@ -1,5 +1,6 @@
 package com.macbeth.algorithm.olpath;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -9,8 +10,8 @@ import java.util.Set;
  * Time:11:47
  **/
 public interface Parser {
-    String getContent();
     Set<String> parseImgPath();
     Set<String> parseHref();
     String parseTitle();
+    void setContent(String content);
 }
