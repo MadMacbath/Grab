@@ -53,7 +53,7 @@ public class Grab {
             Set<String> imgUrls = parser.parseImgPath();
             System.out.println(imgUrls);
             FileDeal deal = SimpleFileDeal.getInstance();
-            deal.saveFile(imgUrls);
+//            deal.saveFile(imgUrls);
             Set<String> hrefs = parser.parseHref();
             if (hrefs == null || hrefs.size() == 0) {
                 return;
