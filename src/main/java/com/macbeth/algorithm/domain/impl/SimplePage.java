@@ -5,10 +5,7 @@ import com.macbeth.algorithm.Constants;
 import com.macbeth.algorithm.domain.Page;
 import com.macbeth.algorithm.filedeal.FileDeal;
 import com.macbeth.algorithm.olpath.Parser;
-import com.macbeth.algorithm.olpath.impl.SimpleParser;
 import com.macbeth.algorithm.utils.StringUtils;
-import com.macbeth.algorithm.utils.TimeUtils;
-import lombok.Data;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

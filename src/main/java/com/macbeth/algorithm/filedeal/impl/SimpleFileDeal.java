@@ -1,19 +1,20 @@
 package com.macbeth.algorithm.filedeal.impl;
 
 
-import com.macbeth.algorithm.Constants;
 import com.macbeth.algorithm.filedeal.FileDeal;
 import com.macbeth.algorithm.utils.StringUtils;
 import com.macbeth.algorithm.utils.TimeUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * author:macbeth
