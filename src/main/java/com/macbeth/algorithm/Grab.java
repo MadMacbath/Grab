@@ -2,11 +2,7 @@ package com.macbeth.algorithm;
 
 
 import com.macbeth.algorithm.domain.Page;
-import com.macbeth.algorithm.domain.impl.SimplePage;
-import com.macbeth.algorithm.filedeal.FileDeal;
-import com.macbeth.algorithm.filedeal.impl.SimpleFileDeal;
-import com.macbeth.algorithm.olpath.Parser;
-import com.macbeth.algorithm.olpath.impl.SimpleParser;
+import com.macbeth.algorithm.parser.impl.SimpleParser;
 
 import java.io.IOException;
 
@@ -17,10 +13,5 @@ import java.io.IOException;
  **/
 public class Grab {
     public static void main(String[] args) throws IOException {
-        Parser parser = new SimpleParser();
-        FileDeal fileDeal = new SimpleFileDeal();
-        Page page = SimplePage.getInstance(Constants.URL_PATH,parser,fileDeal);
-        page.setRoot(page);
-        page.ergodicSaveImg(page);
     }
 }
