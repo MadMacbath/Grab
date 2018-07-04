@@ -1,5 +1,7 @@
 package com.macbeth.algorithm.parser;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,11 @@ import java.util.List;
  * Date:2018/7/3
  * Time:16:48
  **/
+@Data
 public class Document {
-    private List<Dom> doms;
+    private Dom root;
+
+    public Document(Dom root) {
+        this.root = root;
+    }
 }

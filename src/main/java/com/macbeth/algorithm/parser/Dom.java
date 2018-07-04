@@ -18,6 +18,8 @@ public class Dom {
     private Map<String,String> properties = Maps.newHashMap();
     private List<Dom> children;
 
+    public Dom(){}
+
     public Dom(String tagName, String value, Map<String, String> properties) {
         TagName = tagName;
         this.value = value;
