@@ -1,5 +1,7 @@
 package com.macbeth.algorithm.parser;
 
+import com.macbeth.algorithm.domain.Page;
+
 import java.util.Set;
 
 /**
@@ -8,8 +10,8 @@ import java.util.Set;
  * Time:10:41
  **/
 public interface Parser {
-    String getContent(String url);
-    Set<String> parseHrefs();
-    Set<String> paseImgs();
-
+    Page parse(String url);
+    interface Request{
+        String connect(String url);
+    }
 }
