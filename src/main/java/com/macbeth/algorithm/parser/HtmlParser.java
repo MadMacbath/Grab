@@ -7,7 +7,6 @@ package com.macbeth.algorithm.parser;
  **/
 public class HtmlParser {
     private String content;
-    private List<>
 
     public HtmlParser(String content){
         this.content = content;
