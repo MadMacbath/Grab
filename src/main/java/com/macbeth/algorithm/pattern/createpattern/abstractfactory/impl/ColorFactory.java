@@ -6,25 +6,25 @@ import com.macbeth.algorithm.pattern.createpattern.abstractfactory.Shape;
 
 /**
  * author:macbeth
- * Date:2018/7/4
- * Time:17:58
+ * Date:2018/7/5
+ * Time:9:32
  **/
 public class ColorFactory extends AbstractFactory {
+    @Override
+    public Shape getShape(String shape) {
+        return null;
+    }
+
     @Override
     public Color getColor(String color) {
         if (color == null)
             return null;
         if (color.equalsIgnoreCase("RED"))
             return new Red();
-        else if (color.equalsIgnoreCase("BLUE"))
-            return new Blue();
         else if (color.equalsIgnoreCase("GREEN"))
             return new Green();
-        return null;
-    }
-
-    @Override
-    public Shape getShape(String shape) {
+        else if (color.equalsIgnoreCase("BLUE"))
+            return new Blue();
         return null;
     }
 }
