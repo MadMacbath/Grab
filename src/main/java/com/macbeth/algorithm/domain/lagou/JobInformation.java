@@ -1,6 +1,5 @@
 package com.macbeth.algorithm.domain.lagou;
 
-import com.macbeth.algorithm.domain.lagou.address.Address;
 import com.macbeth.algorithm.enumeration.JobLabel;
 import com.macbeth.algorithm.enumeration.JobType;
 import com.sun.xml.internal.ws.api.addressing.AddressingPropertySet;
@@ -30,8 +29,6 @@ public class JobInformation {
     private String jobAdvantage;
     // 描述
     private String description;
-    // 地址
-    private Address address;
     // 职位要求
     private String jobRequest;
     // 发布公司
