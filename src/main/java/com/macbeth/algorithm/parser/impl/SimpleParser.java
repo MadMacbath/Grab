@@ -3,6 +3,7 @@ package com.macbeth.algorithm.parser.impl;
 import com.google.common.collect.Sets;
 import com.macbeth.algorithm.domain.Page;
 import com.macbeth.algorithm.parser.Parser;
+import com.macbeth.algorithm.utils.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -34,7 +35,9 @@ public class SimpleParser implements Parser {
             page.setHrefs(sets);
             Element element = document.select(".page_no").last();
             if (element != null) {
-                element.attr("href");
+                String next = element.attr("href");
+                if(! StringUtils.isEmpty(next)){
+                }
             }
 
         } catch (IOException e) {
