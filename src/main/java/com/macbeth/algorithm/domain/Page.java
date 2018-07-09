@@ -20,13 +20,43 @@ import java.util.regex.Pattern;
 @Data
 public class Page {
     private String url;
+    private String nextPageUrl;
     private Page parent;
     private Parser parser;
     private Set<String> hrefs;
     private Page nextPage;
+    private Set<JobInformation> jobInformationSet;
+    private Set<Company> company;
 
     public Page(String url){
         this.url = url;
 
     }
+
+    public Page getNextPage(){
+        if (this.nextPageUrl != null && ! StringUtils.isEmpty(this.nextPageUrl))
+            return parser.parsePage(this.nextPageUrl);
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
