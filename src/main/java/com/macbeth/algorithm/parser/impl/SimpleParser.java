@@ -6,7 +6,6 @@ import com.macbeth.algorithm.domain.Page;
 import com.macbeth.algorithm.domain.lagou.Company;
 import com.macbeth.algorithm.domain.lagou.JobInformation;
 import com.macbeth.algorithm.parser.Parser;
-import com.macbeth.algorithm.utils.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
