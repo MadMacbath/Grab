@@ -21,12 +21,10 @@ public class MyBatisTest {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatis.xml"));
         SqlSession session = factory.openSession();
         CompanyMapper mapper = session.getMapper(CompanyMapper.class);
-            Company company = new Company();
-            company.setScale("-100");
-            company.setName("test");
-            company.setLocation("成都");
-//            company.setDescription("desc");
-        mapper.saveCompany(company);
+
+        Company company = mapper.selectCompany(9L);
+        System.out.println(company);
+
         session.commit();
         session.close();
     }
