@@ -76,7 +76,7 @@ public class SimpleParser implements Parser {
             company.setName(text);
 
             text = doc.getTextOfFirstElement(".top_info .company_word");
-            company.setDesc(text);
+            company.setDescription(text);
 
             Elements elements = doc.select(".item_container .number").next("span");
             text = doc.getTextOfFirstElement(elements);

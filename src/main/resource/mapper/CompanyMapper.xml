@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macbeth.algorithm.mapper.CompanyMapper">
+    <select id="selectCompany" resultType="Company" parameterType="long">
+        SELECT * FROM LAGOU_COMPANY WHERE id = #{id}
+    </select>
+
+    <insert id="saveCompany" useGeneratedKeys="true">
+        INSERT INTO LAGOU_COMPANY (name,description,location,scale) VALUES (#{name},#{description},#{location},#{scale});
+    </insert>
+
+    <insert id="saveCompanies" useGeneratedKeys="true">
+        INSERT INTO LAGOU_COMPANY (name,description,location,scale) VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.name},#{item.description},#{item.location},#{item.scale})
+        </foreach>
+    </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
