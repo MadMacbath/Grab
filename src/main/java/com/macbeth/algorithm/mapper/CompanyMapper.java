@@ -12,5 +12,6 @@ import java.util.List;
 public interface CompanyMapper {
     Company selectCompany(Long id);
     void saveCompany(Company company);
+    List<Company> selectCompanies();
     void saveCompanies(List<Company> list);
 }

@@ -2,8 +2,8 @@ package com.macbeth.algorithm.domain.lagou;
 
 import com.macbeth.algorithm.enumeration.JobLabel;
 import com.macbeth.algorithm.enumeration.JobType;
-import com.sun.xml.internal.ws.api.addressing.AddressingPropertySet;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -14,6 +14,7 @@ import java.util.Date;
  **/
 // 职位信息表
 @Data
+@ToString
 public class JobInformation {
     private Long id;
     private String jobName;

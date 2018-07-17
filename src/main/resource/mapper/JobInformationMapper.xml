@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macbeth.algorithm.mapper.JobInformationMapper">
+    <resultMap id="informationMap" type="JobInformation">
+        <id property="id" column="id" />
+        <result property="jobName" column="job_name"/>
+        <result property="jobRequestSummary" column="job_request_summary"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="jobAdvantage" column="job_advantage"/>
+        <result property="description" column="description"/>
+        <result property="jobRequest" column="job_request"/>
+        <association property="company" column="company_id" javaType="Company" resultMap="companyMap" />
+    </resultMap>
+
+    <resultMap id="companyMap" type="company">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+        <result property="location" column="location" />
+        <result property="scale" column="scale"/>
+    </resultMap>
+
+    <select id="selectJobInformation">
+        SELECT * FROM LAGOU_JOBINFORMATION WHERE id = #{id}
+    </select>
+
+    <select id="selectInformation" resultMap="informationMap">
+        SELECT j.*,c.* FROM LAGOU_JOBINFORMATION j, LAGOU_COMPANY c WHERE j.company_id = c.id ORDER BY j.id DESC LIMIT 1
+    </select>
+
+    <insert id="saveJobInformation" parameterType="JobInformation" useGeneratedKeys="true">
+        INSERT INTO LAGOU_JOBINFORMATION (job_name,job_request_summary,publish_time,job_advantage,description,job_request,company_id) VALUES
+        (#{jobName},#{jobRequestSummary},#{publishTime},#{jobAdvantage},#{description},#{jobRequest},#{company.id})
+    </insert>
+
+    <insert id="saveJobInformations" useGeneratedKeys="true" parameterType="JobInformation">
+        INSERT INTO LAGOU_JOBINFORMATION (job_name,job_request_summary,publish_time,job_advantage,description,job_request,company_id) VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.jobName},#{item.jobRequestSummary},#{item.publishTime},#{item.jobAdvantage},#{item.description},#{item.jobRequest},#{item.companyId})
+        </foreach>
+    </insert>
+</mapper>

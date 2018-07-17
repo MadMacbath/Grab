@@ -20,6 +20,7 @@
     </environments>
     <mappers>
         <mapper resource="mapper/CompanyMapper.xml" />
+        <mapper resource="mapper/JobInformationMapper.xml" />
     </mappers>
 </configuration>
 
