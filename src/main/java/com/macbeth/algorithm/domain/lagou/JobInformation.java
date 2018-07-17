@@ -2,7 +2,6 @@ package com.macbeth.algorithm.domain.lagou;
 
 import com.macbeth.algorithm.enumeration.JobLabel;
 import com.macbeth.algorithm.enumeration.JobType;
-import com.sun.xml.internal.ws.api.addressing.AddressingPropertySet;
 import lombok.Data;
 
 import java.util.Date;
