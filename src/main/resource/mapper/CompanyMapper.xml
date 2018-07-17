@@ -16,7 +16,7 @@
         SELECT * FROM LAGOU_COMPANY WHERE id = #{id}
     </select>
 
-    <select id="selectCompanies">
+    <select id="selectCompanies" resultType="Company">
         SELECT * FROM LAGOU_COMPANY WHERE scale > 100 ORDER BY id DESC LIMIT 10
     </select>
 

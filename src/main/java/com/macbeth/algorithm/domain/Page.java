@@ -7,10 +7,8 @@ import com.macbeth.algorithm.parser.Parser;
 import com.macbeth.algorithm.utils.StringUtils;
 import lombok.Data;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * author:macbeth
@@ -20,23 +18,57 @@ import java.util.regex.Pattern;
 @Data
 public class Page {
     private String url;
-    private String nextPageUrl;
-    private Page parent;
     private Parser parser;
-    private Set<String> hrefs;
+    private Set<String> hrefs = Sets.newHashSet();
+
+    private String nextPageUrl;
     private Page nextPage;
-    private Set<JobInformation> jobInformationSet;
-    private Set<Company> company;
+    private Set<JobInformation> jobInformations = Sets.newHashSet();
+    private Set<Company> companies = Sets.newHashSet();
 
     public Page(String url){
         this.url = url;
 
     }
 
+    public String getNextPageUrl(){
+        if (StringUtils.isEmpty(this.nextPageUrl)) {
+            try {
+                this.nextPageUrl = this.parser.parseNextPageUrl(this.url);
+            }catch (IOException e){
+                return null;
+            }
+        }
+        return nextPageUrl;
+    }
+
     public Page getNextPage(){
-        if (this.nextPageUrl != null && ! StringUtils.isEmpty(this.nextPageUrl))
-            return parser.parsePage(this.nextPageUrl);
-        return null;
+        if (this.nextPage == null){
+            this.nextPage = this.parser.parsePage(this.getNextPageUrl());
+        }
+        return this.nextPage;
+    }
+
+    public Set<JobInformation> getJobInformations(){
+        if (this.jobInformations.size() <= 0){
+            for (String url :this.getHrefs()){
+                JobInformation jobInformation = this.parser.parseJobInformation(url);
+                if (jobInformation == null) continue;
+                this.jobInformations.add(jobInformation);
+            }
+        }
+        return this.jobInformations;
+    }
+
+    public Set<Company> getCompanies(){
+        if (this.companies.size() <= 0) {
+            for (String url : this.getHrefs()){
+                Company company = this.parser.parseCompany(url);
+                if (company == null) continue;
+                this.companies.add(company);
+            }
+        }
+        return this.companies;
     }
 }
 

@@ -2,13 +2,16 @@ package com.macbeth.algorithm.mymybatis;
 
 import com.google.common.collect.Lists;
 import com.macbeth.algorithm.domain.lagou.Company;
+import com.macbeth.algorithm.domain.lagou.JobInformation;
 import com.macbeth.algorithm.mapper.CompanyMapper;
+import com.macbeth.algorithm.mapper.JobInformationMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,12 +23,23 @@ public class MyBatisTest {
     public static void main(String[] args) throws IOException {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatis.xml"));
         SqlSession session = factory.openSession();
-        CompanyMapper mapper = session.getMapper(CompanyMapper.class);
+        JobInformationMapper mapper = session.getMapper(JobInformationMapper.class);
+        CompanyMapper companyMapper = session.getMapper(CompanyMapper.class);
+        Company company = companyMapper.selectCompany(9l);
 
-        Company company = mapper.selectCompany(9L);
-        System.out.println(company);
+//        JobInformation information = new JobInformation();
+//        information.setJobName("test company id");
+//        information.setCompany(company);
+//        information.setDescription("description");
+//        information.setJobAdvantage("advantage");
+//        information.setJobRequest("request");
+//        information.setJobRequestSummary("request summary");
+//        information.setPublishTime(new Date());
+//        mapper.saveJobInformation(information);
+        JobInformation jobInformation = mapper.selectInformation();
+        System.out.println(jobInformation);
 
-        session.commit();
+//        session.commit();
         session.close();
     }
 }

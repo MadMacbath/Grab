@@ -6,10 +6,15 @@ import com.macbeth.algorithm.domain.Page;
 import com.macbeth.algorithm.domain.lagou.Company;
 import com.macbeth.algorithm.domain.lagou.JobInformation;
 import com.macbeth.algorithm.parser.Parser;
+import com.macbeth.algorithm.parser.Tester;
+import com.macbeth.algorithm.utils.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Set;
@@ -19,9 +24,18 @@ import java.util.Set;
  * Date:2018/7/5
  * Time:17:23
  **/
+@Service
+@Profile("dev")
+@Scope
 public class SimpleParser implements Parser {
+    private Tester tester;
+    public SimpleParser(){}
+    public SimpleParser(Tester tester){
+        this.tester = tester;
+    }
     @Override
     public Page parsePage(String url) {
+        if (StringUtils.isEmpty(url)) return null;
         Set<String> sets = Sets.newHashSet();
         Page page = new Page(url);
         page.setUrl(url);
@@ -37,13 +51,6 @@ public class SimpleParser implements Parser {
                 }
             }
             page.setHrefs(sets);
-            Element element = document.select(".page_no").last();
-            if (element != null) {
-                String nextUrl = element.attr("href");
-                if (! nextUrl.contains("javascript")){
-                    page.setNextPageUrl(nextUrl);
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,22 +58,22 @@ public class SimpleParser implements Parser {
     }
 
     @Override
-    public void parseInformation(Page page) {
-        Set<String> sets = page.getHrefs();
-        if (sets != null && sets.size() > 0) return;
-        for (String href : sets){
-            if (href.contains("jobs")){
-                JobInformation jobInformation = this.parseJobInformation(href);
-                page.getJobInformationSet().add(jobInformation);
+    public String parseNextPageUrl(String currentPageUrl) throws IOException {
+        Document document = Jsoup.connect(currentPageUrl).get();
+        Element element = document.select(".page_no").last();
+        if (element != null) {
+            String nextUrl = element.attr("href");
+            if (! nextUrl.contains("javascript")){
+                return null;
             }
-            if (href.contains("gongsi")){
-                Company company = this.parseCompany(href);
-                page.getCompany().add(company);
-            }
+            return nextUrl;
         }
+        return null;
     }
 
-    private Company parseCompany(String href) {
+    @Override
+    public Company parseCompany(String href) {
+        if (! href.contains("gongsi")) return null;
         Company company = new Company();
         try {
             DocumentPlus doc = (DocumentPlus) Jsoup.connect(href).get();
@@ -89,8 +96,17 @@ public class SimpleParser implements Parser {
         return null;
     }
 
-    private JobInformation parseJobInformation(String href) {
+    @Override
+    public JobInformation parseJobInformation(String href) {
         return null;
+    }
+
+    @Override
+    public void test() {
+        tester.test();
+    }
+    public void tests(){
+        System.out.println("tests dev");
     }
 }
 
