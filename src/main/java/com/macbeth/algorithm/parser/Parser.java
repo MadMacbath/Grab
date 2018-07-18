@@ -17,6 +17,4 @@ public interface Parser {
     String parseNextPageUrl(String currentUrl)throws IOException;
     Company parseCompany(String url);
     JobInformation parseJobInformation(String url);
-    void test();
-    void tests();
 }

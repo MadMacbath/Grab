@@ -2,9 +2,8 @@ package com.macbeth.algorithm;
 
 
 import com.macbeth.algorithm.config.BeansConfig;
-import com.macbeth.algorithm.parser.Encoreable;
-import com.macbeth.algorithm.parser.Parser;
-import com.macbeth.algorithm.parser.Performance;
+import com.macbeth.algorithm.domain.lagou.Company;
+import com.macbeth.algorithm.service.CompanyService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
@@ -17,9 +16,8 @@ import java.io.IOException;
 public class Grab {
     public static void main(String[] args) throws IOException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeansConfig.class);
-        Performance performance = (Performance) context.getBean("performance");
-        performance.perform("macbeth");
-        Encoreable encoreable = (Encoreable) performance;
-        encoreable.performEncore();
+        CompanyService service= (CompanyService) context.getBean("companyService");
+        Company company = service.getCompanyById(9l);
+        System.out.println(company);
     }
 }

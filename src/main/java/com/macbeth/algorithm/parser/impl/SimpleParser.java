@@ -6,7 +6,6 @@ import com.macbeth.algorithm.domain.Page;
 import com.macbeth.algorithm.domain.lagou.Company;
 import com.macbeth.algorithm.domain.lagou.JobInformation;
 import com.macbeth.algorithm.parser.Parser;
-import com.macbeth.algorithm.parser.Tester;
 import com.macbeth.algorithm.utils.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,11 +27,6 @@ import java.util.Set;
 @Profile("dev")
 @Scope
 public class SimpleParser implements Parser {
-    private Tester tester;
-    public SimpleParser(){}
-    public SimpleParser(Tester tester){
-        this.tester = tester;
-    }
     @Override
     public Page parsePage(String url) {
         if (StringUtils.isEmpty(url)) return null;
@@ -99,14 +93,6 @@ public class SimpleParser implements Parser {
     @Override
     public JobInformation parseJobInformation(String href) {
         return null;
-    }
-
-    @Override
-    public void test() {
-        tester.test();
-    }
-    public void tests(){
-        System.out.println("tests dev");
     }
 }
 
